@@ -43,7 +43,7 @@ function! s:Running() abort
 endfunction
 
 function! s:Start() abort
-  if s:Running()
+  if s:Running() || exists('s:client.startup_error')
     return
   endif
   let s:client = copilot#client#New({'editorConfiguration' : s:EditorConfiguration()})
@@ -70,11 +70,7 @@ function! copilot#RunningClient() abort
 endfunction
 
 function! s:NodeVersionWarning() abort
-  if exists('s:client.node_version') && s:client.node_version =~# '^1[67]\.'
-    echohl WarningMsg
-    echo "Warning: Node.js" matchstr(s:client.node_version, '^\d\+') "is end-of-life and support will be dropped in a future release of copilot.vim."
-    echohl NONE
-  elseif exists('s:client.node_version_warning')
+  if exists('s:client.node_version_warning')
     echohl WarningMsg
     echo 'Warning:' s:client.node_version_warning
     echohl NONE
@@ -202,9 +198,9 @@ function! copilot#Complete(...) abort
   if !a:0
     return completion.Await()
   else
-    call copilot#client#Result(completion, a:1)
+    call copilot#client#Result(completion, function(a:1, [b:_copilot]))
     if a:0 > 1
-      call copilot#client#Error(completion, a:2)
+      call copilot#client#Error(completion, function(a:2, [b:_copilot]))
     endif
   endif
 endfunction
@@ -371,13 +367,21 @@ function! s:UpdatePreview() abort
   endtry
 endfunction
 
-function! s:HandleTriggerResult(result) abort
-  if !exists('b:_copilot')
-    return
+function! s:HandleTriggerResult(state, result) abort
+  let a:state.suggestions = type(a:result) == type([]) ? a:result : get(empty(a:result) ? {} : a:result, 'items', [])
+  let a:state.choice = 0
+  if get(b:, '_copilot') is# a:state
+    call s:UpdatePreview()
   endif
-  let b:_copilot.suggestions = type(a:result) == type([]) ? a:result : get(empty(a:result) ? {} : a:result, 'items', [])
-  let b:_copilot.choice = 0
-  call s:UpdatePreview()
+endfunction
+
+function! s:HandleTriggerError(state, result) abort
+  let a:state.suggestions = []
+  let a:state.choice = 0
+  let a:state.error = a:result
+  if get(b:, '_copilot') is# a:state
+    call s:UpdatePreview()
+  endif
 endfunction
 
 function! copilot#Suggest() abort
@@ -385,7 +389,7 @@ function! copilot#Suggest() abort
     return ''
   endif
   try
-    call copilot#Complete(function('s:HandleTriggerResult'), function('s:HandleTriggerResult'))
+    call copilot#Complete(function('s:HandleTriggerResult'), function('s:HandleTriggerError'))
   catch
     call copilot#logger#Exception()
   endtry
