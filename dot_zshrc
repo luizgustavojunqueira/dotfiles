@@ -125,7 +125,7 @@ eval "$(zoxide init zsh --cmd cd)"
 alias fzf='fzf --preview "batcat --color=always --style=numbers --line-range=:500 {}"'
 
 # general use
-alias ls='exa --icons -l'                                                          # ls
+alias ls='exa --icons'                                                          # ls
 alias l='exa -lbF --icons'                                                # list, size, type, git
 alias ll='exa -lbGF --icons'                                             # long list
 alias llm='exa -lbGd --icons --sort=modified'                            # long list, modified date sort
