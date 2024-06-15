@@ -1,5 +1,3 @@
 require("luizg.remap")
 require("luizg.set")
-require("luizg.lazy")
-require("luizg.theme_kanagawa")
-require("luizg.explorer")
+require("luizg.lazy_init")
