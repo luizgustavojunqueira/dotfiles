@@ -125,16 +125,16 @@ eval "$(zoxide init zsh --cmd cd)"
 alias fzf='fzf --preview "batcat --color=always --style=numbers --line-range=:500 {}"'
 
 # general use
-alias ls='exa'                                                          # ls
-alias l='exa -lbF'                                                # list, size, type, git
-alias ll='exa -lbGF'                                             # long list
-alias llm='exa -lbGd --sort=modified'                            # long list, modified date sort
-alias la='exa -lga --color-scale'  # all list
-alias lx='exa -lbhHigUmuSa@ --time-style=long-iso --color-scale' # all + extended list
+alias ls='exa --icons -l'                                                          # ls
+alias l='exa -lbF --icons'                                                # list, size, type, git
+alias ll='exa -lbGF --icons'                                             # long list
+alias llm='exa -lbGd --icons --sort=modified'                            # long list, modified date sort
+alias la='exa -lga --color-scale --icons'  # all list
+alias lx='exa -lbhHigUmuSa@ --time-style=long-iso --color-scale --icons' # all + extended list
 
 # specialty views
-alias lS='exa -1'                                                              # one column, just names
-alias lt='exa --tree --level=2'                                         # treealias lzd='lazydocker'
+alias lS='exa -1 --icons'                                                              # one column, just names
+alias lt='exa --tree --level=2 --icons'                                         # treealias lzd='lazydocker'
 
 alias lzd='lazydocker'
 
