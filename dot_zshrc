@@ -70,7 +70,7 @@ ZSH_THEME="bira"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(asdf git zsh-autosuggestions docker vscode)
+plugins=(asdf git zsh-autosuggestions docker)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -100,18 +100,6 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-#if [ "$TMUX" = "" ]; then
-
-#    padraoCreated=$(tmux ls | grep Padrao)
-#    if [ "$padraoCreated" = "" ]; then
-        # Não existe a sessão padrao, então cria ela e cria uma janela chamada Padrao
-#        tmux new -sPadrao -nPadrao
-#    else
-#        tmux attach -tPadrao
-#    fi
-
-#fi
-
 # ROS2
 source /opt/ros/humble/setup.zsh
 
@@ -134,15 +122,27 @@ alias lx='exa -lbhHigUmuSa@ --time-style=long-iso --color-scale --icons' # all +
 
 # specialty views
 alias lS='exa -1 --icons'                                                              # one column, just names
-alias lt='exa --tree --level=2 --icons'                                         # treealias lzd='lazydocker'
+alias lt='exa --tree --level=2 --icons'                                         # treealias
 
 alias lzd='lazydocker'
+alias lzg='lazygit'
 
 # Starship prompt
 eval "$(starship init zsh)"
 
+# Bat
 alias cat='batcat'
 
+# Sioyek PDF Viewer
 alias sioyek='sioyek > /dev/null 2>&1'
 
 export EDITOR='nvim'
+
+function yy() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
