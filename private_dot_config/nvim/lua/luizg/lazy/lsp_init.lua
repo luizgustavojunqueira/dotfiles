@@ -53,9 +53,26 @@ return {
 					["<C-d>"] = cmp.mapping.scroll_docs(4),
 					["<C-f>"] = cmp_action.luasnip_jump_forward(),
 					["<C-b>"] = cmp_action.luasnip_jump_backward(),
-					["<CR>"] = cmp.mapping.confirm({ select = true }),
 					["<Tab>"] = cmp_action.luasnip_supertab(),
 					["<S-Tab>"] = cmp_action.luasnip_shift_supertab(),
+					["<C-y>"] = cmp.mapping.confirm({ select = false }),
+					["<C-e>"] = cmp.mapping.abort(),
+					["<Up>"] = cmp.mapping.select_prev_item({ behavior = "select" }),
+					["<Down>"] = cmp.mapping.select_next_item({ behavior = "select" }),
+					["<C-p>"] = cmp.mapping(function()
+						if cmp.visible() then
+							cmp.select_prev_item({ behavior = "insert" })
+						else
+							cmp.complete()
+						end
+					end),
+					["<C-n>"] = cmp.mapping(function()
+						if cmp.visible() then
+							cmp.select_next_item({ behavior = "insert" })
+						else
+							cmp.complete()
+						end
+					end),
 				}),
 				snippet = {
 					expand = function(args)
@@ -66,10 +83,6 @@ return {
 					{ name = "nvim_lsp" },
 					{ name = "buffer" },
 					{ name = "path" },
-				},
-				preselect = "item",
-				completion = {
-					completeopt = "menu,menuone,noinsert",
 				},
 			})
 		end,
