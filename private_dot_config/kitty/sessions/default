@@ -2,6 +2,4 @@ layout vertical
 
 cd ~
 
-launch --title "Editor" nvim 
 launch --title "Terminal" zsh 
-resize_window shorter 10
