@@ -1,8 +1,7 @@
 export const opened = Variable("");
 
 App.connect("window-toggled", (_, name, visible) => {
-  console.log(name);
-  if (name === "menu" && !visible) {
+  if (name === "control-center" && !visible) {
     Utils.timeout(500, () => (opened.value = ""));
   }
 });
@@ -25,7 +24,7 @@ export const ArrowToggleButton = ({
           class_name: "label-box horizontal",
           children: [icon, label],
         }),
-        on_primary_click: () => {
+        on_secondary_click: () => {
           if (condition()) {
             deactivate();
             if (opened.value === name) opened.value = "";
@@ -33,7 +32,7 @@ export const ArrowToggleButton = ({
             activate();
           }
         },
-        on_secondary_click: () => {
+        on_primary_click: () => {
           activate();
           opened.value = opened.value === name ? "" : name;
         },
@@ -44,7 +43,7 @@ export const ArrowToggleButton = ({
     box.toggleClassName("active", condition());
   });
 
-export const Menu = ({ name, icon, title, content }) => {
+export const Menu = ({ name, icon, title, content, haveTitle }) => {
   return Widget.Revealer({
     transition: "slide_down",
     reveal_child: opened.bind().as((v) => v === name),
@@ -52,13 +51,13 @@ export const Menu = ({ name, icon, title, content }) => {
       class_names: ["menu", name],
       vertical: true,
       children: [
+        haveTitle &&
         Widget.Box({
           class_name: "title-box",
           children: [
             icon,
             Widget.Label({
               class_name: "title",
-              css: "color: black;",
               label: title,
               truncate: "end",
             }),

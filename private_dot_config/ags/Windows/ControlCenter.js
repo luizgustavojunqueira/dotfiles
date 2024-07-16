@@ -1,7 +1,16 @@
-import { MediaBox } from "../Widgets/Media.js";
-import { VolumeBox } from "../Widgets/Volume.js";
-import { BrightnessBox } from "../Widgets/Brightness.js";
-import { NetworkToggle, WiFiSelectionMenu } from "../Widgets/Network.js";
+import { MediaBox } from "../Widgets/ControlCenter/Media.js";
+import { VolumeBox } from "../Widgets/ControlCenter/Volume.js";
+import { BrightnessBox } from "../Widgets/ControlCenter/Brightness.js";
+import {
+  NetworkToggle,
+  WiFiSelectionMenu,
+} from "../Widgets/ControlCenter/Network.js";
+import {
+  BluetoothToggle,
+  BluetoothDevices,
+} from "../Widgets/ControlCenter/Bluetooth.js";
+
+import Header from "../Widgets/ControlCenter/Header.js";
 
 const ControlRevealer = () =>
   Widget.Revealer({
@@ -11,8 +20,14 @@ const ControlRevealer = () =>
       child: Widget.Box({
         vertical: true,
         children: [
-          NetworkToggle(),
+          Header(),
+          Widget.Box({
+            class_name: "toggle-box",
+            vertical: false,
+            children: [BluetoothToggle(), NetworkToggle()],
+          }),
           WiFiSelectionMenu(),
+          BluetoothDevices(),
           BrightnessBox(),
           VolumeBox(),
           MediaBox(),
@@ -23,8 +38,8 @@ const ControlRevealer = () =>
         const y = Math.round(event.get_coords()[2]);
         const w = widget.get_allocation().width - 15;
         const h = widget.get_allocation().height - 15;
-        if (x <= 15 || x >= w || y <= 0 || y >= h) {
-          App.closeWindow("control-center");
+        if (x <= -15 || x >= w + 15 || y <= -15 || y >= h + 15) {
+          Utils.timeout(500, () => App.closeWindow("control-center"));
         }
       },
     }),
@@ -35,7 +50,6 @@ const ControlRevealer = () =>
     },
     "window-toggled",
   );
-
 export default () =>
   Widget.Window({
     name: "control-center",
@@ -46,4 +60,4 @@ export default () =>
       css: "padding: 10px; min-width: 250px;",
       child: ControlRevealer(),
     }),
-  }).keybind("Escape", (self) => App.closeWindow("control-center"));
+  });

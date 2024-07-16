@@ -1,0 +1,23 @@
+.menu {
+  margin-top: 10px;
+  background: #2c2e32;
+  padding-right: 5px;
+  border-radius: 5px;
+  border: 1px solid #3d3f43;
+}
+
+.toggle-button {
+  margin-top: 10px;
+  background: #2c2e32;
+  padding-right: 5px;
+  border-radius: 5px;
+  border: 1px solid #3d3f43;
+}
+
+.toggle-button:nth-child(1) {
+  margin-right: 10px;
+}
+
+.menu label {
+  color: white;
+}

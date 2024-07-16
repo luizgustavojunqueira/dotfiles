@@ -92,6 +92,7 @@ export default {
       down: "pan-down-symbolic",
       up: "pan-up-symbolic",
     },
+    time: "hourglass-symbolic",
   },
   system: {
     cpu: "org.gnome.SystemMonitor-symbolic",
