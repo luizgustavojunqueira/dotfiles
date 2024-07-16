@@ -1,0 +1,11 @@
+.volume-box {
+  margin-top: 10px;
+  background: #2c2e32;
+  padding-right: 5px;
+  border-radius: 5px;
+  border: 1px solid #3d3f43;
+}
+
+.volume-button {
+  color: white;
+}

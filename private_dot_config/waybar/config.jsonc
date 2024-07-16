@@ -1,0 +1,171 @@
+{
+  "layer": "top",
+  "spacing": 8,
+  "reload_style_on_change": true,
+  "modules-left": ["group/management","group/clock-group", "mpris"], 
+  "modules-center": [],
+  "modules-right": [ "custom/search", "hyprland/workspaces"],
+  "hyprland/workspaces": {
+    "active-only": "true",
+    "format": "{windows}{icon}",
+    "format-icons": {
+      "empty": "", 
+      "default": "",
+    },
+    "window-rewrite": {
+      "title<.*WhatsApp.*>": "", 
+      "class<Google-chrome>": "", 
+      "class<Google-chrome> title<.*github.*>": "", 
+      "class<Spotify>": "",
+      "class<kitty>": "", 
+    },
+  },
+  "hyprland/window": {
+    "max-length": 50,
+    "separate-outputs": true,
+    "format": "{title}",
+    "rewrite":{
+      "(.*) - Google chrome": "🌎 Chrome",
+      "Terminal": "",
+    }
+  },
+  "battery": {
+    "format": "{icon}",
+    "format-icons": ["", "", "", "", ""],
+    "tooltip-format": "Battery {capacity}%"
+  },
+  "clock": {
+    "format": "{:%A %B %d (%R)}  ",
+    "tooltip-format": "<tt><big>{calendar}</big></tt>",
+    "calendar": {
+      "mode"          : "month",
+      "mode-mon-col"  : 3,
+      "weeks-pos"     : "right",
+      "on-scroll"     : 1,
+      "format": {
+        "months":     "<span color='#ffead3'><b>{}</b></span>",
+        "days":       "<span color='#ecc6d9'><b>{}</b></span>",
+        "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+        "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+        "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+      }
+    },
+    "actions":  {
+      "on-click-right": "mode",
+      "on-click-forward": "tz_up",
+      "on-click-backward": "tz_down",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down"
+    }
+  }, 
+  // "backlight": {
+  //   "on-scroll-up": "swayosd-client --brightness raise",
+  //   "on-scroll-down": "swayosd-client --brightness lower",
+  //   "device": "intel_backlight",
+  //   "format": "brightness: {percent}%",
+  // },
+  "bluetooth": {
+    "format": " {status}",
+    "format-connected": " {device_alias}",
+    "format-connected-battery": " {device_battery_percentage}%",
+    // "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
+    "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+    "on-click": "blueman-manager",
+  },
+  "wireplumber": {
+    "format": "{volume}% {icon}",
+    "format-muted": "",
+    "on-click": "swayosd-client --output-volume mute-toggle ",
+    "on-click-right": "pavucontrol",
+    "on-scroll-up": "swayosd-client --output-volume raise",
+    "on-scroll-down": "swayosd-client --output-volume lower",
+    "format-icons": ["", "", ""]
+  },
+  "network": {
+    "interface": "wlan0",
+    "format": "{ifname}",
+    "format-wifi": "",
+    "format-ethernet": "{ipaddr}/{cidr} 󰊗",
+    "format-disconnected": "No Internet", //An empty format will hide the module.
+    "tooltip-format": "{ifname} via {gwaddr} 󰊗",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+    "tooltip-format-ethernet": "{ifname} ",
+    "tooltip-format-disconnected": "Disconnected",
+    "on-click": "networkmanager_dmenu",
+    "max-length": 50
+  },
+  "power-profiles-daemon": {
+    "format": "{icon}",
+    "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+    "tooltip": true,
+    "format-icons": {
+      "default": "",
+      "performance": "",
+      "balanced": "",
+      "power-saver": ""
+    }
+  },
+  "wlr/taskbar": {
+    "format": "{icon}",
+    "icon-size": 14,
+    "icon-theme": "Numix-Circle",
+    "tooltip-format": "{title}",
+    "on-click": "activate",
+    "on-click-middle": "close",
+  },
+  "mpris": {
+    "format": " {status_icon} {dynamic}",
+    "dynamic-order": ["title"],
+    "status-icons": {
+      "default": "▶",
+      "playing": "⏸",
+      "paused": "▶",
+    },
+    "ignored-players": ["chromium"]
+  },
+  "custom/power": {
+    "format": "\udb82\udcc7",
+    "tooltip": false,
+    "on-click": "wlogout -s"
+  },
+  "image#arch":{
+    "path": "/home/luizg/Pictures/archlinux-icon.svg",
+    "size": 24,
+    "interval": 5,
+    "on-click": "wlogout -s"
+  },
+  "group/management":{
+    "orientation": "horizontal",
+     "modules": [
+      "image#arch",
+      "battery",
+      "wireplumber",
+      "bluetooth",
+      "network",
+      "power-profiles-daemon"
+    ]
+  },
+  "custom/clock_icon": {
+    "format" : "  \uf017  ",
+    "tooltip": false,
+  },
+  "group/clock-group":{
+    "orientation": "horizontal",
+    // "drawer": {
+    //   "transition-duration": 500,
+    //   "transition-left-to-right": true,
+    // },
+    "modules": [
+      "custom/clock_icon",
+      "clock",
+    ]
+  },
+  "custom/search":{
+    "format": "Apps \ue68f ",
+    "on-click": "pkill wofi || wofi --show drun --style ~/.config/wofi/styles.css --conf ~/.config/wofi/config
+"
+  }
+}

@@ -1,0 +1,61 @@
+.shuffle-button {
+  color: white;
+}
+.play-button {
+  color: white;
+}
+.loop-button {
+  color: white;
+}
+.previous-button {
+  color: white;
+}
+.next-button {
+  color: white;
+}
+
+.active {
+  color: green;
+}
+
+slider {
+  border: 1px solid white;
+  border-radius: 200px;
+  min-width: 5px;
+  min-height: 5px;
+}
+.position-slider slider {
+  background: white;
+}
+
+.track-title {
+  font-size: 20px;
+  font-weight: bold;
+  padding-top: 5px;
+}
+
+.media-box {
+  margin-top: 10px;
+  background: #2c2e32;
+  padding-right: 5px;
+  border-radius: 5px;
+  border: 1px solid #3d3f43;
+}
+
+.track-cover {
+  background-size: cover;
+  background-position: center;
+  border-radius: 5px 0px 0px 5px;
+}
+
+.track-info {
+  margin-left: 10px;
+}
+
+.position-box {
+  margin-left: 10px;
+}
+
+.position-end {
+  margin-left: 10px;
+}
