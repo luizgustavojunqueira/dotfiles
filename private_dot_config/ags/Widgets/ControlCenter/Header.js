@@ -23,13 +23,13 @@ export const BatteryProgress = () => {
         visible: Battery.bind("available"),
         children: [
           Widget.Icon({ icon: Battery.bind("icon_name") }),
-          Widget.Label({ label: Battery.bind("percent").as((p) => `${p}%`) }),
+          Widget.Label({ label: Battery.bind("percent").as((p) => ` ${p}%`) }),
         ],
       }),
       Widget.Box({
         class_name: "uptime-box",
         children: [
-          Widget.Label({ label: "\uf253" }),
+          Widget.Label({ label: "\uf253 " }),
           Widget.Label({ label: uptime.bind() }),
         ],
       }),
@@ -55,16 +55,24 @@ export default () => {
             children: [
               Widget.Button({
                 vpack: "center",
-                class_name: "white",
+                class_name: "white power-menu-button",
+                tooltipText: "Lock",
                 on_clicked: () => execAsync("hyprlock"),
-                child: Widget.Icon(icons.powermenu.logout),
+                child: Widget.Icon({
+                  class_name: "lock",
+                  icon: icons.powermenu.logout,
+                }),
               }),
 
               Widget.Button({
                 vpack: "center",
-                class_name: "white",
+                class_name: "white power-menu-button ",
+                tooltipText: "Logout",
                 on_clicked: () => execAsync("wlogout -s"),
-                child: Widget.Icon(icons.powermenu.shutdown),
+                child: Widget.Icon({
+                  class_name: "logout",
+                  icon: icons.powermenu.shutdown,
+                }),
               }),
             ],
           }),

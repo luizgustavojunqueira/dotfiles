@@ -1,4 +1,5 @@
 import Widget from "resource:///com/github/Aylur/ags/widget.js";
+import Utils from "resource:///com/github/Aylur/ags/utils.js";
 import Network from "resource:///com/github/Aylur/ags/service/network.js";
 
 import { Menu, ArrowToggleButton } from "../../Common.js";
@@ -6,6 +7,7 @@ import { Menu, ArrowToggleButton } from "../../Common.js";
 export const NetworkToggle = () =>
   ArrowToggleButton({
     name: "network",
+    classname: "network-toggle",
     icon: Widget.Icon({ class_name: "white" }).hook(
       Network,
       (icon) => (icon.icon = Network.wifi.icon_name || ""),

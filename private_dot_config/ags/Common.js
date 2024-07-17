@@ -1,3 +1,8 @@
+import Widget from "resource:///com/github/Aylur/ags/widget.js";
+import Variable from "resource:///com/github/Aylur/ags/variable.js";
+import App from "resource:///com/github/Aylur/ags/app.js";
+import Utils from "resource:///com/github/Aylur/ags/utils.js";
+
 export const opened = Variable("");
 
 App.connect("window-toggled", (_, name, visible) => {
@@ -12,11 +17,11 @@ export const ArrowToggleButton = ({
   label,
   activate,
   deactivate,
-  activateOnArrow = true,
+  classname,
   connection: [service, condition],
 }) =>
   Widget.Box({
-    class_name: "toggle-button",
+    class_name: `toggle-button ${classname}`,
     children: [
       Widget.Button({
         child: Widget.Box({
@@ -70,6 +75,50 @@ export const Menu = ({ name, icon, title, content, haveTitle }) => {
           children: content,
         }),
       ],
+    }),
+  });
+};
+
+export const PopupWindow = ({
+  name,
+  margins,
+  anchor,
+  visible,
+  content,
+  transition,
+}) => {
+  return Widget.Window({
+    name,
+    margins,
+    anchor,
+    visible,
+    child: Widget.Box({
+      css: "padding: 10px; min-width: 250px;",
+      child: Widget.Revealer({
+        class_name: `${name}-revealer`,
+        transition,
+        child: Widget.EventBox({
+          child: Widget.Box({
+            vertical: true,
+            children: content,
+          }),
+          onHoverLost: (widget, event) => {
+            const x = Math.round(event.get_coords()[1]);
+            const y = Math.round(event.get_coords()[2]);
+            const w = widget.get_allocation().width - 15;
+            const h = widget.get_allocation().height - 15;
+            if (x <= -15 || x >= w + 15 || y <= -15 || y >= h + 15) {
+              Utils.timeout(500, () => App.closeWindow(name));
+            }
+          },
+        }),
+      }).hook(
+        App,
+        (self, wname, visible) => {
+          if (wname === name) self.reveal_child = visible;
+        },
+        "window-toggled",
+      ),
     }),
   });
 };

@@ -14,10 +14,6 @@
   border: 1px solid #3d3f43;
 }
 
-.toggle-button:nth-child(1) {
-  margin-right: 10px;
-}
-
 .menu label {
   color: white;
 }

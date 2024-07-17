@@ -1,21 +1,9 @@
-.header {
-  margin-top: 10px;
-  background: #2c2e32;
-  padding-right: 5px;
-  border-radius: 5px;
-  border: 1px solid #3d3f43;
-}
-
 .battery-progress {
   margin: 10px;
 }
 
 .avatar {
   margin: 10px;
-  background: #3d3f43;
-  border-radius: 10px;
-
-  border: 1px solid #4e4f54;
 }
 
 .battery-box {
@@ -24,4 +12,22 @@
 
 .uptime-box {
   margin-top: 5px;
+}
+
+.logout {
+  color: red;
+  font-size: 25px;
+}
+
+.lock {
+  color: green;
+  font-size: 25px;
+}
+
+.power-menu-button {
+  border-radius: 50px;
+}
+
+.power-menu-button:hover {
+  background: white;
 }

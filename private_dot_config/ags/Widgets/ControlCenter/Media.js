@@ -1,9 +1,10 @@
 import Widget from "resource:///com/github/Aylur/ags/widget.js";
 import Mpris from "resource:///com/github/Aylur/ags/service/mpris.js";
+import Utils from "resource:///com/github/Aylur/ags/utils.js";
 
 const PlayButton = (player) => {
   return Widget.Button({
-    class_name: "play-button",
+    class_name: "play-button hover",
     onClicked: () => player.playPause(),
     child: Widget.Icon({
       icon: player.bind("play-back-status").as((status) => {

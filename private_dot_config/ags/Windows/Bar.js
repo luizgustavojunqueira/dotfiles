@@ -1,3 +1,7 @@
+import Widget from "resource:///com/github/Aylur/ags/widget.js";
+
+import { ToggleControlCenter } from "./ControlCenter/ToggleWindow.js";
+
 const Bar = (monitor = 0) => {
   return Widget.Window({
     monitor,
@@ -8,11 +12,11 @@ const Bar = (monitor = 0) => {
     exclusivity: "exclusive",
     layer: "top",
     child: Widget.CenterBox({
-      endWidget: Widget.Button({
-        label: "Menu",
-        on_clicked: () => {
-          App.toggleWindow("control-center");
-        },
+      startWidget: Widget.Box({}),
+      centerWidget: Widget.Box({}),
+      endWidget: Widget.Box({
+        hpack: "end",
+        children: [ToggleControlCenter()],
       }),
     }),
   });

@@ -5,12 +5,13 @@ import { Menu, ArrowToggleButton } from "../../Common.js";
 export const BluetoothToggle = () => {
   return ArrowToggleButton({
     name: "bluetooth",
+    classname: "bluetooth-toggle",
     icon: Widget.Icon({ class_name: "white" }).hook(
       Bluetooth,
       (icon) =>
-        (icon.icon = Bluetooth.enabled
-          ? "bluetooth-active-symbolic"
-          : "bluetooth-disabled-symbolic"),
+      (icon.icon = Bluetooth.enabled
+        ? "bluetooth-active-symbolic"
+        : "bluetooth-disabled-symbolic"),
     ),
     label: Widget.Label({ class_name: "white", truncate: "end" }).hook(
       Bluetooth,
@@ -37,7 +38,10 @@ export const BluetoothToggle = () => {
 const DeviceItem = (device) => {
   return Widget.Box({
     children: [
-      Widget.Icon(device.icon_name + "-symbolic"),
+      Widget.Icon({
+        css: "margin-left:5px;",
+        icon: device.icon_name + "-symbolic",
+      }),
       Widget.Label(" " + device.name),
       Widget.Label({
         label: ` ${device.battery_percentage}%`,

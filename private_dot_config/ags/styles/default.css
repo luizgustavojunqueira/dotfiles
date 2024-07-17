@@ -1,8 +1,11 @@
 @import url("./media.css");
+@import url("./powerprofile.css");
 @import url("./brightess.css");
 @import url("./volume.css");
 @import url("./menu.css");
 @import url("./header.css");
+@import url("./bluetooth.css");
+@import url("./network.css");
 
 .white {
   color: white;
@@ -31,4 +34,26 @@
 
 #control-center button:hover {
   box-shadow: inset 0 0 0 1px #ffffff;
+}
+
+#control-center button {
+  font-size: 1.1rem;
+}
+
+.bar {
+  background-color: #1b1d21;
+  color: #ffffff;
+  border-radius: 15px;
+}
+
+.toggle-control-center {
+  margin: 2px;
+
+  background: #1b1d21;
+  font-size: 1.2rem;
+  border: none;
+  background-image: none;
+  box-shadow: none;
+
+  color: white;
 }
