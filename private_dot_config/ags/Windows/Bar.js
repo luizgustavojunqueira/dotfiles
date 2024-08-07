@@ -2,6 +2,8 @@ import Widget from "resource:///com/github/Aylur/ags/widget.js";
 
 import { ToggleControlCenter } from "./ControlCenter/ToggleWindow.js";
 
+// import { Workspaces } from "../Widgets/Workspaces/Workspaces.js";
+
 const Bar = (monitor = 0) => {
   return Widget.Window({
     monitor,
@@ -13,7 +15,9 @@ const Bar = (monitor = 0) => {
     layer: "top",
     child: Widget.CenterBox({
       startWidget: Widget.Box({}),
-      centerWidget: Widget.Box({}),
+      centerWidget: Widget.Box({
+        // children: [Workspaces()],
+      }),
       endWidget: Widget.Box({
         hpack: "end",
         children: [ToggleControlCenter()],

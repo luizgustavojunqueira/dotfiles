@@ -16,6 +16,8 @@ return {
         yaml = { "prettierd" },
         cpp = { "ast-grep" },
         c = { "ast-grep" },
+        arduino = { "ast-grep" },
+        go = { "ast-grep" },
         html = { "prettierd" },
         css = { "prettierd" },
       },

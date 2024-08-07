@@ -2,6 +2,8 @@ import Widget from "resource:///com/github/Aylur/ags/widget.js";
 import Mpris from "resource:///com/github/Aylur/ags/service/mpris.js";
 import Utils from "resource:///com/github/Aylur/ags/utils.js";
 
+const players = Mpris.bind("players");
+
 const PlayButton = (player) => {
   return Widget.Button({
     class_name: "play-button hover",
@@ -137,7 +139,8 @@ function lengthStr(length) {
 
 function updatePositionSlider(slider, player) {
   if (slider.dragging) return;
-  slider.value = player.position / player.length;
+  let value = player.position / player.length;
+  slider.value = value;
 }
 
 const PositionAndControl = (player) => {
@@ -174,36 +177,23 @@ const PositionAndControl = (player) => {
   });
 };
 
-let current = null;
+const Player = (p) => {
+  if (p.entry == null) return Widget.Box({ visible: false });
 
-const update = (box) => {
-  const player = Mpris.getPlayer("spotify") || Mpris.players[0] || null;
-
-  if (!player) {
-    current = null;
-    return;
-  }
-  if (player.entry == null) {
-    box.visible = false;
-    return;
-  }
-
-  current = player;
-  box.children = [
-    Widget.Box({
-      vertical: false,
-      children: [
-        CoverArt(player),
-        Widget.Box({
-          vertical: true,
-          children: [TrackInfo(player), PositionAndControl(player)],
-        }),
-      ],
-    }),
-  ];
+  return Widget.Box({
+    vertical: false,
+    children: [
+      CoverArt(p),
+      Widget.Box({
+        vertical: true,
+        children: [TrackInfo(p), PositionAndControl(p)],
+      }),
+    ],
+  });
 };
 
 export const MediaBox = () =>
   Widget.Box({
-    className: "media-box",
-  }).hook(Mpris, update, "notify::players");
+    class_name: "media-box",
+    children: players.as((p) => p.map(Player)),
+  });

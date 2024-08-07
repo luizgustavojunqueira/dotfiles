@@ -1,5 +1,33 @@
 @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap");
 
+/* :root { */
+/*   --wallpaper: url("/home/luizg/Downloads/car-is-driving-along-road-along-sea.jpg"); */
+/**/
+/*   /* Special */
+*/
+/*   --background: #0c1219; */
+/*   --foreground: #e7d4bc; */
+/*   --cursor: #e7d4bc; */
+/**/
+/*   /* Colors */ */
+/*   --color0: #0c1219; */
+/*   --color1: #a15e42; */
+/*   --color2: #9a6c58; */
+/*   --color3: #b38a6c; */
+/*   --color4: #d9a06b; */
+/*   --color5: #fac379; */
+/*   --color6: #797b84; */
+/*   --color7: #e7d4bc; */
+/*   --color8: #a19483; */
+/*   --color9: #a15e42; */
+/*   --color10: #9a6c58; */
+/*   --color11: #b38a6c; */
+/*   --color12: #d9a06b; */
+/*   --color13: #fac379; */
+/*   --color14: #797b84; */
+/*   --color15: #e7d4bc; */
+/* } */
+
 * {
   font-family: "FiraCode", monospace;
   font-style: normal;
@@ -7,25 +35,22 @@
 }
 
 window {
-  background-color: rgba(0, 0, 0, 0);
-}
-
-#outer-box {
-  margin: 5px;
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: #0c1219;
   border-radius: 5px;
   padding: 5px;
   border: 2px solid black;
 }
 
+#outer-box {
+}
+
 #inner-box {
-  background-color: rgba(0, 0, 0, 0.3);
 }
 
 #input {
   margin: 10px;
-  background-color: #202020;
-  color: #fff;
+  background-color: #e7d4bc;
+  color: black;
 }
 
 #scroll {
@@ -34,10 +59,21 @@ window {
 }
 
 #entry {
+  background-color: #464851;
+  border-radius: 5px;
+  margin: 1px;
+}
+
+#entry:selected {
+  background-color: #fac379;
 }
 
 #text {
   margin: 5px;
   color: #fff;
   font-size: 1.2rem;
+}
+
+#text:selected {
+  color: black;
 }
