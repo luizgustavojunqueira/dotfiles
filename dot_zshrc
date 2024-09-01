@@ -168,3 +168,10 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 export GPG_TTY=$(tty) # por algum motivo o gpg do git parou de funcionar e precisa disso agr
+
+GOPATH=$HOME/go
+PATH=$PATH:$GOPATH/bin
+
+alias icat="kitten icat"
+alias d="kitten diff"
+alias dcu="docker compose up"

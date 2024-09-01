@@ -12,8 +12,8 @@ return {
     "L3MON4D3/LuaSnip",
     "saadparwaiz1/cmp_luasnip",
     "j-hui/fidget.nvim",
+    "onsails/lspkind.nvim",
   },
-
   config = function()
     local cmp = require("cmp")
     local cmp_lsp = require("cmp_nvim_lsp")
@@ -69,12 +69,16 @@ return {
       },
     })
 
-    local cmp_select = { behavior = cmp.SelectBehavior.Select }
-
     cmp.setup({
       snippet = {
         expand = function(args)
           require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
+        end,
+        backward = function()
+          require("luasnip").jump(-1)
+        end,
+        forward = function()
+          require("luasnip").jump(1)
         end,
       },
       window = {
@@ -100,7 +104,16 @@ return {
         ["<C-Space>"] = cmp.mapping.complete(),
         ["<C-u>"] = cmp.mapping.scroll_docs(-4),
         ["<C-d>"] = cmp.mapping.scroll_docs(4),
+        ["<C-e>"] = cmp.mapping.close(),
+        ["<C-f>"] = cmp.mapping(function()
+          require("luasnip").jump(1)
+        end),
+
       }),
+      preselect = 'item',
+      completion = {
+        completeopt = "menu,menuone,noinsert",
+      },
       sources = cmp.config.sources({
         { name = "luasnip" }, -- For luasnip users.
       }, {
@@ -110,6 +123,14 @@ return {
         { name = "path" },
         { name = "cmdline" },
       }),
+      formatting = {
+        fields = { 'abbr', 'kind', 'menu' },
+        format = require('lspkind').cmp_format({
+          mode = 'symbol',       -- show only symbol annotations
+          maxwidth = 50,         -- prevent the popup from showing more than provided characters
+          ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead
+        })
+      },
     })
 
     vim.diagnostic.config({
