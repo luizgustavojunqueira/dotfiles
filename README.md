@@ -27,3 +27,5 @@ To update the repository:
 ```bash
 chezmoi update -v
 ```
+
+Or, if you don't want to use chezmoi, you can clone this repository and manually copy the files to your home directory.
