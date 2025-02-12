@@ -1,0 +1,38 @@
+# List of plugins
+
+# Plugin manager
+set -g @plugin 'tmux-plugins/tpm'
+
+# Theme
+set -g @plugin 'Nybkox/tmux-kanagawa'
+
+# THEME CONFIGURATION
+set -g @kanagawa-ram-usage-label " "
+set -g @kanagawa-ignore-window-colors true
+set -g @kanagawa-theme 'wave'
+set -g @kanagawa-plugins " battery cpu-usage ram-usage time playerctl"
+set -g @kanagawa-show-powerline true
+set -g @kanagawa-show-edge-icons true
+set -g @kanagawa-show-left-icon "#h | #S"
+set -g @kanagawa-battery-label false
+set -g @kanagawa-show-battery-status true
+set -g @kanagawa-playerctl-format "{{ title }}"
+set -g @kanagawa-show-timezone false
+set -g @kanagawa-day-month true
+
+# Plugin for navigating between panes and vim splits
+set -g @plugin 'christoomey/vim-tmux-navigator'
+set -g @vim_navigator_prefix_mapping_clear_screen ""
+set -g @vim_navigator_mapping_left "M-h"  
+set -g @vim_navigator_mapping_right "M-l"
+set -g @vim_navigator_mapping_up "M-k"
+set -g @vim_navigator_mapping_down "M-j"
+
+# Plugin for better copy-pasting
+set -g @plugin 'fcsonline/tmux-thumbs'
+set -g @thumbs-command 'echo -n {} | wl-copy'
+
+run-shell ~/.tmux/plugins/tmux-thumbs/tmux-thumbs.tmux
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run '~/.tmux/plugins/tpm/tpm'
