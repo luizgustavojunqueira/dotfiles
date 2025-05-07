@@ -3,22 +3,17 @@
 # Plugin manager
 set -g @plugin 'tmux-plugins/tpm'
 
+set -g @plugin 'tmux-plugins/tmux-sensible'
+
 # Theme
-set -g @plugin 'Nybkox/tmux-kanagawa'
+# set -g @plugin 'Nybkox/tmux-kanagawa'
 
 # THEME CONFIGURATION
-set -g @kanagawa-ram-usage-label " "
-set -g @kanagawa-ignore-window-colors true
-set -g @kanagawa-theme 'wave'
-set -g @kanagawa-plugins " battery cpu-usage ram-usage time playerctl"
-set -g @kanagawa-show-powerline true
-set -g @kanagawa-show-edge-icons true
-set -g @kanagawa-show-left-icon "#h | #S"
-set -g @kanagawa-battery-label false
-set -g @kanagawa-show-battery-status true
-set -g @kanagawa-playerctl-format "{{ title }}"
-set -g @kanagawa-show-timezone false
-set -g @kanagawa-day-month true
+
+set -g @plugin 'egel/tmux-gruvbox'
+# set desired theme options...
+set -g @tmux-gruvbox 'dark' # or 'dark256', 'light', 'light256'
+set -g @tmux-gruvbox-statusbar-alpha 'true'
 
 # Plugin for navigating between panes and vim splits
 set -g @plugin 'christoomey/vim-tmux-navigator'
@@ -31,6 +26,18 @@ set -g @vim_navigator_mapping_down "M-j"
 # Plugin for better copy-pasting
 set -g @plugin 'fcsonline/tmux-thumbs'
 set -g @thumbs-command 'echo -n {} | wl-copy'
+
+set -g @plugin 'joshmedeski/tmux-nerd-font-window-name'
+set -g @plugin 'tmux-plugins/tmux-open'
+set -g @plugin 'nhdaly/tmux-better-mouse-mode'
+set -g @plugin 'tmux-plugins/tmux-battery'
+set -g @plugin 'tmux-plugins/tmux-cpu'
+
+set -g @cpu_low_icon "" # icon when cpu is low
+set -g @cpu_medium_icon "" # icon when cpu is medium
+set -g @cpu_high_icon "" # icon when cpu is high
+
+set -g @tmux-gruvbox-right-status-x '#{cpu_fg_color} #{cpu_icon} #{cpu_percentage} #{battery_color_fg} 󰁹 #{battery_percentage}' 
 
 run-shell ~/.tmux/plugins/tmux-thumbs/tmux-thumbs.tmux
 
