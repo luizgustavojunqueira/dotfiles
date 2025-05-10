@@ -47,3 +47,8 @@ hash = "15b2ff7f6563c14d5b2e93b3e9da35de"
 use = "dangooddd/kanagawa"
 rev = "d98f0c3"
 hash = "cada780385f75abbcfbf5343256b441"
+
+[[flavor.deps]]
+use = "bennyyip/gruvbox-dark"
+rev = "b4cc9f2"
+hash = "f44c42bcbed3c8564100e45e2fe3649a"

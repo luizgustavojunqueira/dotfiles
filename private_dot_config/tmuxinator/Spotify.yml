@@ -1,0 +1,9 @@
+# /home/luizg/.config/tmuxinator/Spotify.yml
+
+name: Spotify
+root: ~/
+
+windows:
+    - player:
+          panes:
+              - spotify_player
