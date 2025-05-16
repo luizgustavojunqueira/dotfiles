@@ -1,4 +1,4 @@
 [".config/nvim"]
     type = "git-repo"
-    url = "https://github.com/luizgustavojunqueira/nvim.git"
+    url = "git@github.com:luizgustavojunqueira/nvim.git"
 
