@@ -4,6 +4,8 @@ if status is-interactive
     end
 end
 
+set -gx EDITOR nvim
+
 # Set the shell theme
 theme.sh gruvbox-dark
 
