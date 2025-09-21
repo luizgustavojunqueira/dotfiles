@@ -4,7 +4,7 @@ set -g prefix C-a
 bind C-a send-prefix
 
 # Reload tmux.conf with "Prefix + r"
-bind r source-file ~/.tmux.conf
+bind r source-file ~/.config/tmux/tmux.conf
 
 # Once in copy mode, use "v" to start selection and "y" to yank
 bind-key -T copy-mode-vi 'v' send -X begin-selection 
@@ -21,10 +21,11 @@ bind -r k resize-pane -U 5
 bind -r l resize-pane -R 5
 bind -r h resize-pane -L 5
 
-# Open nvim in the current directory on the current pane
-bind e send-keys "nvim ." Enter
-
 # Open new windows and panes in the current directory
 bind c new-window -c "#{pane_current_path}"
 bind '"' split-window -c "#{pane_current_path}"
 bind % split-window -h -c "#{pane_current_path}"
+
+bind-key T split-window -v -c "#{pane_current_path}" "tms"\; resize-pane -Z
+
+bind-key S split-window -v -c "#{pane_current_path}" "tms switch"\; resize-pane -Z

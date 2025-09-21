@@ -17,7 +17,7 @@ prepend_rules = [
     { name = "*.ino", use = "open_arduino" },
 ]
 
-[manager]
+[mgr]
 ratio =  [1, 4, 2]
 sort_by = "alphabetical"
 

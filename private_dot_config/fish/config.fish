@@ -1,13 +1,13 @@
 if status is-interactive
     if not echo $TMUX | grep tmux-1000 -q
-        tmuxinator start Default
+        tmuxinator start Luizg
     end
 end
 
 set -gx EDITOR nvim
 
 # Set the shell theme
-theme.sh gruvbox-dark
+# theme.sh gruvbox-dark
 
 # Activate things
 zoxide init --cmd cd fish | source
@@ -29,3 +29,9 @@ alias lzg="lazygit"
 
 alias arbo="tmuxinator start ArboMais"
 alias blog="tmuxinator start Blog"
+
+alias t="tms"
+alias k="tms kill"
+alias s="tms switch"
+
+fish_add_path /home/luizg/.spicetify

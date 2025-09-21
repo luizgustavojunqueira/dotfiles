@@ -1,0 +1,32 @@
+#!/bin/bash
+
+input_file="$1"
+output="${input_file%.*}_compressed.mp4"
+
+compress_video_cuda() {
+    ffmpeg -i "$input_file" -vcodec h264_nvenc -preset fast -b:v 5M -pix_fmt yuv420p "$output"
+}
+
+compress_video_cpu() {
+    ffmpeg -i "$input_file" -vcodec libx264 -preset fast -b:v 5M -pix_fmt yuv420p "$output"
+}
+
+if [ -z "$input_file" ]; then
+    echo "Usage: $0 <input_file>"
+    exit 1
+else
+    echo "Choose the compression method:"
+    echo "1. CUDA (GPU)"
+    echo "2. CPU"
+
+    read -p "Enter your choice (1 or 2): " choice
+
+    if [ "$choice" -eq 1 ]; then
+        compress_video_cuda
+    elif [ "$choice" -eq 2 ]; then
+        compress_video_cpu
+    else
+        echo "Invalid choice. Please enter 1 or 2."
+        exit 1
+    fi
+fi
