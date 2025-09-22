@@ -1,0 +1,46 @@
+[opener]
+play = [
+	{ run = 'mpv "$@"', orphan = true, for = "unix" },
+]
+edit = [
+	{ run = 'nvim "$@"', block = true, for = "unix" },
+]
+open = [
+	{ run = 'xdg-open "$@"', desc = "Open" },
+]
+open_arduino = [
+    { run = 'arduino-ide "$0"', desc = "Open Arduino", orphan = true },
+]
+
+[open]
+prepend_rules = [
+    { name = "*.ino", use = "open_arduino" },
+]
+
+[manager]
+ratio =  [1, 4, 2]
+sort_by = "alphabetical"
+
+[preview]
+wrap = "yes"
+
+# [[plugin.prepend_fetchers]]
+# id   = "git"
+# name = "*"
+# run  = "git"
+#
+# [[plugin.prepend_fetchers]]
+# id   = "git"
+# name = "*/"
+# run  = "git"
+
+[plugin]
+prepend_previewers = [
+    # { name = "*.md", run = "mdcat" },
+    { name = "*.csv", run = "rich-preview"}, # for csv files
+    { name = "*.md", run = "rich-preview" }, # for markdown (.md) files
+    { name = "*.rst", run = "rich-preview"}, # for restructured text (.rst) files
+    { name = "*.ipynb", run = "rich-preview"}, # for jupyter notebooks (.ipynb)
+    { name = "*.json", run = "rich-preview"}, # for json (.json) files
+]
+
